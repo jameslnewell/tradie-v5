@@ -1,0 +1,16 @@
+{
+  "name": "tradie-v5",
+  "version": "5.0.0",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "scripts/*",
+      "utilities/*",
+      "examples/*"
+    ]
+  },
+  "dependencies": {
+    "@jest/types": "^24.9.0"
+  },
+  "license": "MIT"
+}

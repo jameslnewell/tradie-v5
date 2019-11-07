@@ -1,0 +1,13 @@
+{
+  "name": "@tradie/package-scripts-example",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@tradie/package-scripts": "^0.1.0"
+  },
+  "scripts": {
+    "build": "package-scripts build",
+    "watch": "package-scripts watch"
+  },
+  "license": "MIT"
+}
