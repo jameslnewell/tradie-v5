@@ -11,7 +11,25 @@
     ]
   },
   "dependencies": {
-    "@jest/types": "^24.9.0"
+    "@jameslnewell/babel-preset": "^2.0.0",
+    "@jameslnewell/editor-config": "^1.0.1",
+    "@jameslnewell/eslint-config": "^0.13.5",
+    "@jameslnewell/jest-preset-test": "^5.0.0",
+    "@jameslnewell/prettier-config": "^1.0.1",
+    "@jameslnewell/typescript-config": "^3.0.0",
+    "@jest/types": "^24.9.0",
+    "@types/jest": "^24.0.22",
+    "babel-jest": "^24.9.0",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "lerna": "^3.18.4",
+    "prettier": "^1.19.0",
+    "pretty-quick": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "license": "MIT"
 }
