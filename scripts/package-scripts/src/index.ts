@@ -4,7 +4,7 @@ yargs
   .scriptName("package-scripts")
   .usage('$0 <cmd> [args]')
   .demandCommand()
-  .commandDir('./commands', {extensions: ['ts']})
+  .commandDir('./commands', {recurse: true, extensions: ['ts']})
   .strict()
   .version()
   .help()

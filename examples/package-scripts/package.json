@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react": "^16.9.11",
+    "react": "^16.11.0"
+  },
+  "devDependencies": {
     "@tradie/package-scripts": "^0.1.0"
   },
   "scripts": {

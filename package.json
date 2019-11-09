@@ -4,9 +4,10 @@
   "private": true,
   "workspaces": {
     "packages": [
+      "configs/*",
+      "examples/*",
       "scripts/*",
-      "utilities/*",
-      "examples/*"
+      "utilities/*"
     ]
   },
   "dependencies": {
