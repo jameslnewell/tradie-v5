@@ -1,7 +1,10 @@
-import {sum} from '.';
+import React from "react";
+import { render } from "@testing-library/react";
+import { Sum } from ".";
 
-describe('sum()', () => {
-  test('returned the sum of the numbers', () => {
-    expect(sum(1, 2)).toEqual(3);
-  })
-})
+describe("<Sum/>", () => {
+  test("returned the sum of the numbers", () => {
+    const { container } = render(<Sum numbers={[1, 2, 3]} />);
+    expect(container.textContent).toEqual(6);
+  });
+});

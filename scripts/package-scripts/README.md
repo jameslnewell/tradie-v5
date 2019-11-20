@@ -1,8 +1,6 @@
 <br/>
 <center>
   <img alt="tradie" src="../../logo.png" height="60px" />
-
-
 </center>
 <br/>
 
@@ -22,7 +20,6 @@ yarn add @tradie/package-scripts
 
 ```
 package-scripts clean
-package-scripts build
-package-scripts watch
+package-scripts build --watch
 package-scripts test
 ```

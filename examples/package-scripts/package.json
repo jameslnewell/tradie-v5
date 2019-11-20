@@ -7,11 +7,14 @@
     "react": "^16.11.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^9.3.2",
     "@tradie/package-scripts": "^0.1.0"
   },
   "scripts": {
+    "clean": "package-scripts clean",
     "build": "package-scripts build",
-    "watch": "package-scripts watch"
+    "watch": "package-scripts build --watch",
+    "test": "package-scripts test"
   },
   "license": "MIT"
 }

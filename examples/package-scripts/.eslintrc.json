@@ -1,0 +1,3 @@
+{
+  "extends": "@tradie/package-scripts/config/eslint"
+}

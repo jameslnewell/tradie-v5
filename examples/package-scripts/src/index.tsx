@@ -1,3 +1,5 @@
-import React from 'react';
+import React from "react";
 
-export const Sum = ({numbers}: {numbers: number[]}) => <>{numbers.reduce((total, number) => total + number)}</>
+export const Sum: React.FC<{ numbers: number[] }> = ({ numbers }) => (
+  <>{numbers.reduce((total, number) => total + number)}</>
+);

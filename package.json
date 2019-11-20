@@ -11,10 +11,11 @@
     ]
   },
   "dependencies": {
+    "@babel/core": "^7.7.2",
     "@jameslnewell/babel-preset": "^2.0.0",
     "@jameslnewell/editor-config": "^1.0.1",
     "@jameslnewell/eslint-config": "^0.13.5",
-    "@jameslnewell/jest-preset-test": "^5.0.0",
+    "@jameslnewell/jest-preset-test": "^5.1.0",
     "@jameslnewell/prettier-config": "^1.0.1",
     "@jameslnewell/typescript-config": "^3.0.0",
     "@jest/types": "^24.9.0",
@@ -24,7 +25,12 @@
     "jest": "^24.9.0",
     "lerna": "^3.18.4",
     "prettier": "^1.19.0",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "publish-if-not-published": "^1.0.2"
+  },
+  "scripts": {
+    "test": "jest",
+    "publish": "lerna exec run publish-if-not-published"
   },
   "husky": {
     "hooks": {

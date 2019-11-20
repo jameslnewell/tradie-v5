@@ -1,0 +1,15 @@
+{
+  "extends": "./node_modules/@jameslnewell/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": true,
+    "lib": ["esnext"],
+    "target": "esnext",
+    "module": "commonjs",
+    "noEmit": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@tradie/*-utils": ["utilities/*-utils/src"]
+    }
+  }
+}

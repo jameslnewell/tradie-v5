@@ -1,30 +1,65 @@
-import {createBundles} from './createBundles';
-import {checkAndCreateTypings} from './checkAndCreateTypings';
+import { Reporter } from "@tradie/reporter-utils";
+import { rootDirectory, outputDirectory } from "../../utils/paths";
+import { listFiles } from "./listFiles";
+import { createBundles } from "./createBundles";
+import { Linter } from "../../utils/linting";
+import { Typechecker } from "../../utils/typing";
 
-export const command = 'build';
-export const describe = 'Build the package.';
-export const builder = {};
-export const handler = async (argv) => {
+export const command = "build";
+export const describe = "Build the package.";
+export const builder = {
+  // watch: {
+  //   alias: 'w',
+  //   default: false,
+  //   describe: 'Watch files for changes and rebuild when files change.'
+  // }
+};
+export const handler = async () => {
   // TODO: handle watching
-  await createBundles({cwd: process.cwd()}); // TODO: find dir up
-  await checkAndCreateTypings({cwd: process.cwd()});
-}
+  try {
+    const reporter = new Reporter();
 
-// reporter.notifyTaskStarted('bundling')
-// reporter.notifyTaskStarted('linting')
-// reporter.notifyTaskStarted('typing')
+    const files = await listFiles({
+      rootDirectory,
+      include: ["src/**/*.{ts,tsx}", "typings/**/*.d.ts"]
+    });
 
-// reporter.notifyTaskFinished('bundling')
-// reporter.notifyTaskFinished('linting')
-// reporter.notifyTaskFinished('typing')
+    const linter = new Linter({
+      rootDirectory
+    });
 
-// reporter.notifyOfInformation(info_details)
-// reporter.notifyOfWarning(warning_details)
-// reporter.notifyOfError(error_details)
+    const checker = new Typechecker({
+      rootDirectory,
+      outputDirectory,
+      declaration: {
+        include: ["src/**"],
+        exclude: ["**/__tests__/**", "**/*.tests.{ts,tsx}"]
+      }
+    });
 
-// reporter.active_task_count: number
-// reporter.shouldWatch: boolean
-// reporter.shouldClearScreen: boolean
+    const bundleTask = async () => {
+      const taskName = "bundling";
+      reporter.startTask(taskName);
+      await createBundles({ rootDirectory, outputDirectory });
+      reporter.finishTask(taskName);
+    };
 
-// reporter.wait() // waits for any active tasks to finish
-// reporter.stop()
+    const typingTask = async () => {
+      const taskName = "typing";
+      reporter.startTask(taskName);
+      reporter.report(taskName, checker.run(files));
+      reporter.finishTask(taskName);
+    };
+
+    const lintingTask = async () => {
+      const taskName = "linting";
+      reporter.startTask(taskName);
+      reporter.report(taskName, linter.lint(files));
+      reporter.finishTask(taskName);
+    };
+
+    await Promise.all([bundleTask(), typingTask(), lintingTask()]);
+  } catch (error) {
+    console.error(error);
+  }
+};

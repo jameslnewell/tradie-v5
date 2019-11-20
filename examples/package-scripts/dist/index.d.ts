@@ -1,4 +1,4 @@
-/// <reference types="react" />
-export declare const Sum: ({ numbers }: {
-    numbers: number[];
-}) => JSX.Element;
+import React from "react";
+export declare const Sum: React.FC<{
+  numbers: number[];
+}>;
