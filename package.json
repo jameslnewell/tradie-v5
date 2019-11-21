@@ -29,8 +29,10 @@
     "publish-if-not-published": "^1.0.2"
   },
   "scripts": {
+    "build": "lerna run build",
     "test": "jest",
-    "publish": "lerna exec run publish-if-not-published"
+    "publish": "lerna exec publish-if-not-published",
+    "prepublishOnly": "yarn run build && yarn run test && yarn run publish"
   },
   "husky": {
     "hooks": {

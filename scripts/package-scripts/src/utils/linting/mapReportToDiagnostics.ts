@@ -1,5 +1,5 @@
 import { CLIEngine } from "eslint";
-import { Diagnostic } from "@tradie/reporter-utils";
+import { Diagnostic } from "../reporter";
 
 export function mapReportToDiagnostics(
   report: CLIEngine.LintReport

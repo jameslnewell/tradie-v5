@@ -5,7 +5,7 @@ import {
   getPreEmitDiagnostics,
   sortAndDeduplicateDiagnostics
 } from "typescript";
-import { Diagnostic } from "@tradie/reporter-utils";
+import { Diagnostic } from "../reporter";
 import { createOptions } from "./createOptions";
 import { createCompilerHost } from "./createCompilerHost";
 import { createProgram } from "./createProgram";

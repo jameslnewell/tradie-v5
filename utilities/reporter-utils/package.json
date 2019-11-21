@@ -1,7 +1,7 @@
 {
   "name": "@tradie/reporter-utils",
-  "version": "3.0.0",
   "private": true,
+  "version": "3.0.0",
   "dependencies": {
     "spinnies": "^0.5.0"
   },

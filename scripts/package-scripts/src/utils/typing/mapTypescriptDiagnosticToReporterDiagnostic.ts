@@ -2,7 +2,7 @@ import {
   Diagnostic as TypeScriptDiagnostic,
   flattenDiagnosticMessageText
 } from "typescript";
-import { Diagnostic as ReporterDiagnostic } from "@tradie/reporter-utils";
+import { Diagnostic as ReporterDiagnostic } from "../../utils/reporter";
 
 export const mapTypescriptDiagnosticToReporterDiagnostic = (
   diagnostic: TypeScriptDiagnostic
@@ -10,7 +10,10 @@ export const mapTypescriptDiagnosticToReporterDiagnostic = (
   let message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
 
   if (!diagnostic.file) {
-    return { message };
+    return {
+      type: "error",
+      message
+    };
   }
 
   let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
@@ -18,6 +21,7 @@ export const mapTypescriptDiagnosticToReporterDiagnostic = (
   );
 
   return {
+    type: "error",
     message,
     location: {
       file: diagnostic.file.fileName,

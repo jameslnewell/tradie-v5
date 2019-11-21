@@ -1,5 +1,5 @@
 import * as fs from "fs-extra";
-import { Reporter } from "@tradie/reporter-utils";
+import { Reporter } from "../../utils/reporter";
 import { outputDirectory } from "../../utils/paths";
 
 export const command = "clean";

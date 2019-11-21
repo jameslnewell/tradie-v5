@@ -23,6 +23,7 @@ export class Reporter {
 
   private promise: Promise<void>;
   private resolve: undefined | (() => void) = undefined;
+  // @ts-ignore
   private reject: undefined | (() => void) = undefined;
 
   private printer = new Printer();

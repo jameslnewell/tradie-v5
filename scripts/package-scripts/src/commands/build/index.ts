@@ -1,4 +1,4 @@
-import { Reporter } from "@tradie/reporter-utils";
+import { Reporter } from "../../utils/reporter";
 import { rootDirectory, outputDirectory } from "../../utils/paths";
 import { listFiles } from "./listFiles";
 import { createBundles } from "./createBundles";
@@ -16,6 +16,7 @@ export const builder = {
 };
 export const handler = async () => {
   // TODO: handle watching
+
   try {
     const reporter = new Reporter();
 
