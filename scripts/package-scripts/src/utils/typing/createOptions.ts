@@ -9,7 +9,7 @@ export interface CreateOptionsOptions {
 // TODO: check compiler options match the defaults
 function checkConfig(config: { [name: string]: any }) {
   if (!Array.isArray(config.include) || !config.include.includes("src")) {
-    throw new Error(`"include" must equal "src"`);
+    // throw new Error(`"include" must equal "src"`);
   }
 }
 

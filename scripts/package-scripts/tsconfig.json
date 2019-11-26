@@ -1,6 +1,7 @@
 {
   "extends": "../../node_modules/@jameslnewell/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "noEmit": true,
     "isolatedModules": true,
     "lib": ["esnext"],
     "target": "esnext",
@@ -8,5 +9,6 @@
     "outDir": "dist",
     "jsx": "react",
     "types": ["@types/node", "@types/jest", "@types/yargs"]
-  }
+  },
+  "include": ["src"]
 }

@@ -1,3 +1,3 @@
 {
-  "extends": "@tradie/package-scripts/config/eslint"
+  "extends": "@tradie/package-scripts/eslint-config"
 }

@@ -1,4 +1,4 @@
-import * as Spinnies from "spinnies";
+import Spinnies from "spinnies";
 import { Diagnostic } from "./Reporter";
 
 function getType(diagnostic: Diagnostic) {

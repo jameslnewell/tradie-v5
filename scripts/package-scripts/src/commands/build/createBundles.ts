@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { rollup, InputOptions, OutputOptions } from "rollup";
-import babel = require("rollup-plugin-babel");
+import babel from "rollup-plugin-babel";
 
 export interface CreateBundlesOptions {
   rootDirectory: string;

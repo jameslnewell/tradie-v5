@@ -11,7 +11,7 @@ export class Linter {
   public constructor(options: LinterOptions) {
     this.cli = new CLIEngine({
       cwd: options.rootDirectory,
-      baseConfig: require("../../../config/eslint"),
+      baseConfig: require("../../../eslint-config"),
       useEslintrc: false
     });
   }

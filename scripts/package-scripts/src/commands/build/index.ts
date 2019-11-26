@@ -34,7 +34,7 @@ export const handler = async () => {
       outputDirectory,
       declaration: {
         include: ["src/**"],
-        exclude: ["**/__tests__/**", "**/*.tests.{ts,tsx}"]
+        exclude: ["**/__tests__/**", "**/*.test{s,}.{ts,tsx}"]
       }
     });
 

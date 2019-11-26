@@ -1,4 +1,4 @@
-import glob = require("fast-glob");
+import glob from "fast-glob";
 
 export interface ListFilesOptions {
   rootDirectory: string;
