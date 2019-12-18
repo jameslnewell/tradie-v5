@@ -1,15 +1,80 @@
+import * as path from "path";
+import chalk from "chalk";
 import Spinnies from "spinnies";
+import { codeFrameColumns } from "@babel/code-frame";
 import { Diagnostic } from "./Reporter";
 
-function getType(diagnostic: Diagnostic) {
+function formatType(diagnostic: Diagnostic) {
   switch (diagnostic.type) {
     case "error":
-      return "ERROR";
+      return chalk.bold.bgRed("ERROR");
     case "warning":
-      return "WARN";
+      return chalk.bold.bgYellow("WARN");
     case "information":
-      return "INFO";
+      return chalk.bold.bgBlue("INFO");
   }
+}
+
+function formatTaskName(taskName: string) {
+  return chalk.bold.cyan(taskName);
+}
+
+function formatLocation(diagnostic: Diagnostic) {
+  if (diagnostic.location) {
+    const file = diagnostic.location.file
+      ? chalk.bold(path.relative(process.cwd(), diagnostic.location.file))
+      : "";
+    if (diagnostic.location.start) {
+      return `${file}:${diagnostic.location.start.line}:${diagnostic.location.start.column}`;
+    } else {
+      return file;
+    }
+  }
+  return "";
+}
+
+function findIndexOfOccurrence(
+  string: string,
+  pattern: RegExp,
+  occurrence: number
+): number | undefined {
+  let count = 0;
+  let match;
+  do {
+    match = pattern.exec(string);
+    console.log(match);
+    if (match && count === occurrence) {
+      return match.index;
+    }
+    ++count;
+  } while (match);
+  return undefined;
+}
+
+function formatCode(diagnostic: Diagnostic) {
+  if (!diagnostic.code) {
+    return "";
+  }
+  if (!diagnostic.location) {
+    return "";
+  }
+  if (!diagnostic.location.start) {
+    return "";
+  }
+
+  const result = codeFrameColumns(
+    diagnostic.code,
+    {
+      start: diagnostic.location.start,
+      end: diagnostic.location.end
+    },
+    {
+      highlightCode: true,
+      linesAbove: 3,
+      linesBelow: 3
+    }
+  );
+  return result;
 }
 
 function getPrintMethod(diagnostic: Diagnostic) {
@@ -20,23 +85,15 @@ function getPrintMethod(diagnostic: Diagnostic) {
   }
 }
 
-function printDiagnostic(diagnostic: Diagnostic) {
+function printDiagnostic(taskName: string, diagnostic: Diagnostic) {
   const printMethod = getPrintMethod(diagnostic);
-  if (diagnostic.location) {
-    if (diagnostic.location.start) {
-      printMethod(
-        `${getType(diagnostic)} ${diagnostic.location.file}:${
-          diagnostic.location.start.line
-        }:${diagnostic.location.start.column}\n`
-      );
-    } else {
-      printMethod(`${getType(diagnostic)} ${diagnostic.location.file}\n`);
-    }
-  }
+  printMethod(
+    `${formatType(diagnostic)} ${formatTaskName(taskName)} ${formatLocation(
+      diagnostic
+    )}\n`
+  );
   printMethod(`${diagnostic.message}\n`);
-  if (diagnostic.code) {
-    printMethod(`${diagnostic.code}\n`);
-  }
+  printMethod(`${formatCode(diagnostic)}\n\n`);
 }
 
 export class Printer {
@@ -55,7 +112,7 @@ export class Printer {
     } else {
       this.spinners.succeed(taskName);
     }
-    diagnostics.forEach(printDiagnostic);
+    diagnostics.forEach(diagnostic => printDiagnostic(taskName, diagnostic));
   }
 
   public onAllTasksStart() {

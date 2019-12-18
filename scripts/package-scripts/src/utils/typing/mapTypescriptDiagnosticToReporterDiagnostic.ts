@@ -26,8 +26,8 @@ export const mapTypescriptDiagnosticToReporterDiagnostic = (
     location: {
       file: diagnostic.file.fileName,
       start: {
-        line,
-        column: character
+        line: line + 1,
+        column: character + 1
       }
     },
     code: diagnostic.file.text

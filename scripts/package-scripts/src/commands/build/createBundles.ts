@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { rollup, InputOptions, OutputOptions } from "rollup";
+import resolve from "rollup-plugin-node-resolve";
 import babel from "rollup-plugin-babel";
 
 export interface CreateBundlesOptions {
@@ -30,6 +31,9 @@ const createInputOptions = ({
       : "./src/index.ts",
     external: createExternals({ rootDirectory }),
     plugins: [
+      resolve({
+        extensions
+      }),
       babel({
         extensions,
         exclude: "node_modules/**",

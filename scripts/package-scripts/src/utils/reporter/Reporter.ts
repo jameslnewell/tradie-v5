@@ -44,6 +44,20 @@ export class Reporter {
   }
 
   /**
+   * Gets whether errors have been reported
+   */
+  public get errored(): boolean {
+    return Object.keys(this.diagnosticsByTask).reduce<boolean>(
+      (error, task) =>
+        error ||
+        this.diagnosticsByTask[task].some(
+          diagnostic => diagnostic.type === "error"
+        ),
+      false
+    );
+  }
+
+  /**
    * Starts a task running
    * @param taskName
    */
